@@ -17,9 +17,9 @@ var pg = require('pg'); // require postgres
 
 // note: postgres://[user]:[password]@[server]:[port]/[name_database]
 // my connectionString to database:
-var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@192.168.99.100:32768/bulletinboard';
-// yours:
-// var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
+// var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@192.168.99.100:32768/bulletinboard';
+// your connetionString to database:
+var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
 ////////////////////// homepage with a welcome and message form ////////////////////////////////////
 app.get('/', function (req, res) {
 	console.log("We entered Home")
