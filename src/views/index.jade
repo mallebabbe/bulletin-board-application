@@ -1,4 +1,13 @@
 extends layout
 
-blockcontent
-	h1 Welcome
+block content
+	h1 Drop a Message
+	form(name="message-form", id='form-message', action="/messages", method="post")
+		div.input
+			span.label Title
+			input(type="text", id='title-message', name="title")
+		div.input
+			span.label Body
+			input(type="text", id='body-message', name="body")
+		div.actions
+			input(type="submit", value="send")
