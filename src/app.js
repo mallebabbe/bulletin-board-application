@@ -16,9 +16,10 @@ app.set('view engine', 'jade');
 var pg = require('pg'); // require postgres
 
 // note: postgres://[user]:[password]@[server]:[port]/[name_database]
-//var connectionString = "postgres://postgres:mysecretpassword@192.168.99.100:32768/bulletinboard";
-// var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
+// mine:
 var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@192.168.99.100:32768/bulletinboard';
+// yours:
+// var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -70,7 +71,7 @@ app.get('/messages', function(req, res) {
 				done(client)
 			} else {
 				done()
-				console.log("HELLO MATE")
+		console.log(allMessages)
 				res.render('messages', {
 					title: "All messages",
 					messages: allMessages
