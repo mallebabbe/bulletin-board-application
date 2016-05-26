@@ -2,7 +2,7 @@ extends layout
 
 block content
 	h1 Drop a Message
-	form(name="message-form", id='form-message', action="/messages", method="post")
+	form(name="message-form", id='form-message', action="/postmessage", method="post")
 		div.input
 			span.label Title
 			input(type="text", id='title-message', name="title")

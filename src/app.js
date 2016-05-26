@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 
 /////////////////POST POST POST ////////////////////////////////////////////////////////////////////////////
 /////////////////////// API API API API ////////////////////////////////////////////////////////////////////
-app.post('/api', function (req, res) {
+app.post('/postmessage', function (req, res) {
 
 	var messageTitle = req.body.title
 	var messageBody = req.body.body
@@ -38,9 +38,12 @@ app.post('/api', function (req, res) {
 	console.log(messageBody)
 
 	pg.connect(connectionString, function (err, client, done) {
-		client.query('insert into messages (title,body) values ($1,$2))', [ messageTitle, messageBody ], function (err, result) {
+		client.query('insert into messages (title,body) values ($1,$2)', [ messageTitle, messageBody ], function (err, result) {
 			if (err) {
-				throw err
+				if (client) {
+					done(client)
+				}
+				return
 			}
 			done();
 		pg.end(); // the client will idle for another 30 seconds, temporarily preventing the app from closing, unless this function is called
@@ -70,8 +73,7 @@ app.get('/messages', function(req, res) {
 				console.log("HELLO MATE")
 				res.render('messages', {
 					title: "All messages",
-					messageTitle: allMessages[0].title,
-					messageBody: allMessages[0].body
+					messages: allMessages
 				})
 			}
 		});

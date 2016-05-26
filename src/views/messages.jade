@@ -2,5 +2,7 @@ extends layout
 
 block content
 	h1 All messages end up here
-	p=messageTitle
-	p=messageBody
+
+	each message in messages
+		h4.messageTitle #{message.title}
+		p.messageBody #{message.body}
