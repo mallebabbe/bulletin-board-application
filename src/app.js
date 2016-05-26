@@ -15,8 +15,10 @@ app.set('view engine', 'jade');
 
 var pg = require('pg'); // require postgres
 
-// postgres://[user]:[password]@[server]/[name_database]
-var connectionString = "postgres://postgres:mysecretpassword@192.168.99.100:32768/bulletinboard";
+// note: postgres://[user]:[password]@[server]:[port]/[name_database]
+//var connectionString = "postgres://postgres:mysecretpassword@192.168.99.100:32768/bulletinboard";
+// var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
+var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@192.168.99.100:32768/bulletinboard';
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,8 +36,6 @@ app.post('/postmessage', function (req, res) {
 
 	var messageTitle = req.body.title
 	var messageBody = req.body.body
-	console.log(messageTitle)
-	console.log(messageBody)
 
 	pg.connect(connectionString, function (err, client, done) {
 		client.query('insert into messages (title,body) values ($1,$2)', [ messageTitle, messageBody ], function (err, result) {
