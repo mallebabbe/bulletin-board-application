@@ -16,14 +16,11 @@ app.set('view engine', 'jade');
 var pg = require('pg'); // require postgres
 
 // note: postgres://[user]:[password]@[server]:[port]/[name_database]
-// mine:
+// my connectionString to database:
 var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@192.168.99.100:32768/bulletinboard';
 // yours:
 // var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// homepage with a welcome and message form
+////////////////////// homepage with a welcome and message form ////////////////////////////////////
 app.get('/', function (req, res) {
 	console.log("We entered Home")
 	res.render('index', {
@@ -31,8 +28,7 @@ app.get('/', function (req, res) {
 	});
 })
 
-/////////////////POST POST POST ////////////////////////////////////////////////////////////////////////////
-/////////////////////// API API API API ////////////////////////////////////////////////////////////////////
+/////////////////POST POST POST //// after submitting message on index.jade //////////////////////////////
 app.post('/postmessage', function (req, res) {
 
 	var messageTitle = req.body.title
@@ -53,10 +49,9 @@ app.post('/postmessage', function (req, res) {
 	res.redirect('messages');
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////MESSAGE PAGE//////////////////////////////////////////////////////////////////////
+//////////////////////////////MESSAGE PAGE////////////////////////////////////////////////////////////////
 app.get('/messages', function(req, res) {
-	console.log("got message page")
+	console.log("We entered messages")
 	pg.connect(connectionString, function (err, client, done) {
 		if (err) {
 			if (client) {
@@ -64,13 +59,14 @@ app.get('/messages', function(req, res) {
 			}
 			return;
 		}
-	console.log("made DB connetion on messages")
+	console.log("We made a DB connetion on table messages")
 		client.query('select * from messages', function (err, result) {
 			var allMessages = result.rows
 			if (err) {
 				done(client)
 			} else {
 				done()
+		console.log("These are all rows in table messages:")
 		console.log(allMessages)
 				res.render('messages', {
 					title: "All messages",
