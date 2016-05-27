@@ -16,8 +16,9 @@ app.set('view engine', 'jade');
 var pg = require('pg'); // require postgres
 
 // note: postgres://[user]:[password]@[server]:[port]/[name_database]
-// my connectionString to database:
-// var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@192.168.99.100:32768/bulletinboard';
+// Sven's connectionString to database: 
+// note for sven, whenever I change relaunch the DB, the PORT number changes
+// var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@192.168.99.100:32779/bulletinboard';
 // your connetionString to database:
 var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
 ////////////////////// homepage with a welcome and message form ////////////////////////////////////
